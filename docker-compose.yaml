@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    networks:
+      - my-network
+    volumes:
+      - mongo-data:/data/db
+
+  my-api:
+    build: .
+    container_name: my-api
+    depends_on:
+      - mongo
+    networks:
+      - my-network
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/pets-api
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    depends_on:
+      - mongo
+    networks:
+      - my-network
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=
+      - ME_CONFIG_BASICAUTH_PASSWORD=
+      - ME_CONFIG_MONGODB_SERVER=mongo
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
