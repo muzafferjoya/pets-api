@@ -9,7 +9,11 @@ const Owner = require('./models/owners');
 //mongoose.connect('mongodb://mongodb:27017/pets-api', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-mongoose.connect('mongodb://mongo:27017/pets-api', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://mongo:27017/pets-api', { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect('mongodb://mongo:27017/pets-api', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB...', err));
 
 
 app.use(express.json());
