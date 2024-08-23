@@ -14,7 +14,7 @@ curl -X POST http://localhost/api/owners \
 ## Create Pet using Owner ID
 
 ```
-curl -X POST http://ab5cdd01c18f843698c46983f5171542-1489826022.us-east-2.elb.amazonaws.com/api/pets \
+curl -X POST http://localhost/api/pets \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Catty",
